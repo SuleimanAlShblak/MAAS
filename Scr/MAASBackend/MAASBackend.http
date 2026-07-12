@@ -1,6 +1,3 @@
 @MAASBackend_HostAddress = http://localhost:5092
 
-GET {{MAASBackend_HostAddress}}/weatherforecast/
-Accept: application/json
-
 ###
