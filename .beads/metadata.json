@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "maas",
+  "project_id": "4b5aba32-66b3-4925-b80f-ecb5c146621b"
+}
