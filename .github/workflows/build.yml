@@ -1,0 +1,60 @@
+name: Build and Test Fullstack Application
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore Dependencies
+        run: dotnet restore Scr/MAASBackend/MAASBackend.csproj
+
+      - name: Build Backend
+        run: dotnet build Scr/MAASBackend/MAASBackend.csproj --configuration Release --no-restore
+
+      - name: Run Backend Tests
+        run: dotnet test Scr/MAASBackend/MAASBackend.csproj --configuration Release --no-build --verbosity normal
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: ./Scr/MAASFrontend/package-lock.json
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./Scr/MAASFrontend
+
+      - name: Run Linting / Tests (Optional)
+        run: npm test -- --watchAll=false
+        working-directory: ./Scr/MAASFrontend
+        continue-on-error: true
+
+      - name: Build React App
+        run: npm run build
+        working-directory: ./Scr/MAASFrontend
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-dist
+          path: ./Scr/MAASFrontend/dist
