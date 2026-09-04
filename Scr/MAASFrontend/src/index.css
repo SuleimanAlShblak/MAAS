@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  color-scheme: light;
+}
+
 :root {
   --sans: system-ui, -apple-system, sans-serif;
   --mono: ui-monospace, monospace;
@@ -16,14 +20,6 @@
   line-height: 1.5;
   color: var(--text);
   background-color: var(--bg);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #e0e0e0;
-    --bg: #1a1a1a;
-    --border: #444;
-  }
 }
 
 body {

@@ -1,16 +1,8 @@
-import './App.css';
-import Button from '@/components/common/Button/Button';
+import "./App.css";
+import LoginPage from "@/pages/LoginPage";
 
 function App() {
-  return (
-    <div>
-      <h1>MAAS</h1>
-      <p>Welcome to the Modern Accounting and Analytics System</p>
-      <Button variant="primary" className="bg-red-50">
-        Click me
-      </Button>
-    </div>
-  );
+  return <LoginPage />;
 }
 
 export default App;
