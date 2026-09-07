@@ -19,13 +19,13 @@ jobs:
           dotnet-version: "10.0.x"
 
       - name: Restore Dependencies
-        run: dotnet restore Scr/MAASBackend/MAASBackend.csproj
+        run: dotnet restore Src/MAASBackend/MAASBackend.csproj
 
       - name: Build Backend
-        run: dotnet build Scr/MAASBackend/MAASBackend.csproj --configuration Release --no-restore
+        run: dotnet build Src/MAASBackend/MAASBackend.csproj --configuration Release --no-restore
 
       - name: Run Backend Tests
-        run: dotnet test Scr/MAASBackend/MAASBackend.csproj --configuration Release --no-build --verbosity normal
+        run: dotnet test Src/MAASBackend/MAASBackend.csproj --configuration Release --no-build --verbosity normal
 
   build-frontend:
     runs-on: ubuntu-latest
@@ -38,23 +38,23 @@ jobs:
         with:
           node-version: "24"
           cache: "npm"
-          cache-dependency-path: ./Scr/MAASFrontend/package-lock.json
+          cache-dependency-path: ./Src/MAASFrontend/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
-        working-directory: ./Scr/MAASFrontend
+          working-directory: ./Src/MAASFrontend
 
       - name: Run Linting / Tests (Optional)
         run: npm test -- --watchAll=false
-        working-directory: ./Scr/MAASFrontend
+          working-directory: ./Src/MAASFrontend
         continue-on-error: true
 
       - name: Build React App
         run: npm run build
-        working-directory: ./Scr/MAASFrontend
+          working-directory: ./Src/MAASFrontend
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: react-dist
-          path: ./Scr/MAASFrontend/dist
+          path: ./Src/MAASFrontend/dist
