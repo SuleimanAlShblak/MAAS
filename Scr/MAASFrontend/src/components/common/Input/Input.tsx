@@ -8,6 +8,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   hint?: string;
   size?: InputSize;
   icon?: React.ReactNode;
+  rightElement?: React.ReactNode;
 };
 
 export default function Input({
@@ -16,6 +17,7 @@ export default function Input({
   hint,
   size,
   icon,
+  rightElement,
   id,
   className,
   ...props
@@ -40,6 +42,7 @@ export default function Input({
     "focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500 focus:border-primary-500",
     "disabled:bg-neutral-50 disabled:text-neutral-400 disabled:cursor-not-allowed",
     sizeStyles[sizeValue],
+    rightElement && "pr-11",
   );
 
   const errorStyles =
@@ -69,6 +72,11 @@ export default function Input({
           id={inputId}
           className={cn(baseStyles, errorStyles, icon && "pl-10", className)}
         />
+        {rightElement && (
+          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+            {rightElement}
+          </div>
+        )}
       </div>
 
       {error && (

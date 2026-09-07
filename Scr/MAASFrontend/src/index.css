@@ -1,7 +1,6 @@
 @import "tailwindcss";
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -22,15 +21,6 @@ html {
   background-color: var(--bg);
 }
 
-body {
-  margin: 0;
-  padding: 20px;
-}
-
-#root {
-  max-width: 1200px;
-  margin: 0 auto;
-}
 
 h1, h2, h3 {
   margin-bottom: 0.5rem;

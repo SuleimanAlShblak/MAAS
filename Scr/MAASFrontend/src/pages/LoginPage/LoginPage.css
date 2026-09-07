@@ -1,0 +1,156 @@
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 8vh, 5rem) 1rem;
+  background: #f7f9fc;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 30.25rem;
+  padding: clamp(2rem, 5vw, 2.75rem);
+  border: 0;
+  border-radius: 1.375rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(31, 54, 78, 0.06);
+}
+
+.login-header h1 {
+  margin: 0;
+  color: #101827;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 2.25rem;
+  letter-spacing: -0.04375rem;
+}
+
+.login-header p {
+  margin: 0.125rem 0 0;
+  color: #5d6878;
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+}
+
+.login-content {
+  margin-top: clamp(2rem, 5vw, 2.5rem);
+}
+
+.login-alert {
+  margin-bottom: 1.25rem;
+  padding: 0.75rem;
+  border: 1px solid;
+  border-radius: 0.5rem;
+}
+
+.login-alert p {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.login-alert-success {
+  border-color: #21a366;
+  background: rgba(33, 163, 102, 0.1);
+}
+
+.login-alert-success p {
+  color: #16834f;
+}
+
+.login-alert-error {
+  border-color: #d94b55;
+  background: rgba(217, 75, 85, 0.1);
+}
+
+.login-alert-error p {
+  color: #c23843;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.login-forgot-password {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.5rem;
+}
+
+.login-forgot-password a,
+.login-register-prompt a {
+  color: #278dbb;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-forgot-password a {
+  font-size: 0.8125rem;
+}
+
+.login-forgot-password a:hover,
+.login-register-prompt a:hover {
+  color: #0879ad;
+}
+
+.login-submit-button {
+  height: 2.9375rem;
+  border-radius: 0.6875rem;
+  background: #078bc5;
+  font-size: 0.9375rem;
+  box-shadow: 0 0.25rem 0.5625rem rgba(7, 139, 197, 0.25);
+}
+
+.login-submit-button:hover {
+  background: #087eb3;
+}
+
+.login-register-prompt {
+  margin: 1rem 0 0;
+  color: #5d6878;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.login-register-prompt a {
+  font-size: inherit;
+}
+
+.login-field-icon {
+  display: block;
+  color: #078bc5;
+}
+
+.login-password-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  
+  color: #9aa9bd;
+  background: transparent;
+  cursor: pointer;
+}
+
+.login-password-toggle:hover {
+  color: #078bc5;
+}
+
+@media (max-width: 30rem) {
+  .login-page {
+    align-items: flex-start;
+    padding: 1.5rem 0.75rem;
+  }
+
+  .login-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+}

@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@lineiconshq/free-icons": "^1.0.6",
+    "@lineiconshq/react-lineicons": "^1.0.5",
     "@material-tailwind/react": "^2.1.10"
   }
 }
