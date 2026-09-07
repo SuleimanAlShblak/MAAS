@@ -42,16 +42,16 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
-          working-directory: ./Src/MAASFrontend
+        working-directory: ./Src/MAASFrontend
 
       - name: Run Linting / Tests (Optional)
         run: npm test -- --watchAll=false
-          working-directory: ./Src/MAASFrontend
+        working-directory: ./Src/MAASFrontend
         continue-on-error: true
 
       - name: Build React App
         run: npm run build
-          working-directory: ./Src/MAASFrontend
+        working-directory: ./Src/MAASFrontend
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
