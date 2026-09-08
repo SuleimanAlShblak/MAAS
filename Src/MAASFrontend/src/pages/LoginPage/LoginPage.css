@@ -81,10 +81,16 @@
 }
 
 .login-forgot-password a,
-.login-register-prompt a {
+.login-register-prompt a,
+.login-register-link {
   color: #278dbb;
   font-weight: 600;
   text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: inherit;
   transition: color 0.2s ease;
 }
 
@@ -93,8 +99,10 @@
 }
 
 .login-forgot-password a:hover,
-.login-register-prompt a:hover {
+.login-register-prompt a:hover,
+.login-register-link:hover {
   color: #0879ad;
+  text-decoration: underline;
 }
 
 .login-submit-button {

@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { cn } from "@/utils/cs";
 
 type InputSize = "sm" | "md" | "lg";
@@ -22,7 +23,8 @@ export default function Input({
   className,
   ...props
 }: InputProps) {
-  const inputId = id || `input-${Math.random().toString(36).slice(2)}`;
+  const generatedId = useId();
+  const inputId = id || generatedId;
   const sizeValue: InputSize = size || "md";
 
   const sizeStyles = {
