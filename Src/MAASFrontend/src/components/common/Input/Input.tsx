@@ -82,13 +82,13 @@ export default function Input({
       </div>
 
       {error && (
-        <p className="mt-1.5 text-sm text-semantic-error font-medium">
+        <p className="mt-1.5 text-sm text-semantic-error font-medium m-0">
           {error}
         </p>
       )}
 
       {hint && !error && (
-        <p className="mt-1.5 text-sm text-neutral-500">{hint}</p>
+        <p className="mt-1.5 text-sm text-neutral-500 m-0">{hint}</p>
       )}
     </div>
   );

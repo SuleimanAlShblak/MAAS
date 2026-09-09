@@ -24,9 +24,13 @@ type FormErrors = {
 
 export type LoginPageProps = {
   onNavigateToRegister?: () => void;
+  onNavigateToForgotPassword?: () => void;
 };
 
-export default function LoginPage({ onNavigateToRegister }: LoginPageProps = {}) {
+export default function LoginPage({
+  onNavigateToRegister,
+  onNavigateToForgotPassword,
+}: LoginPageProps = {}) {
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -201,7 +205,17 @@ export default function LoginPage({ onNavigateToRegister }: LoginPageProps = {})
             />
 
             <div className="login-forgot-password">
-              <a href="#">Forgot password?</a>
+              {onNavigateToForgotPassword ? (
+                <button
+                  type="button"
+                  onClick={onNavigateToForgotPassword}
+                  className="login-forgot-password-link"
+                >
+                  Forgot password?
+                </button>
+              ) : (
+                <a href="#forgot-password">Forgot password?</a>
+              )}
             </div>
 
             {/* Submit Button */}

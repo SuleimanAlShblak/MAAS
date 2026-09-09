@@ -2,43 +2,58 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import LoginPage from "@/pages/LoginPage/LoginPage";
 import RegisterPage from "@/pages/RegisterPage/RegisterPage";
+import ForgotPasswordPage from "@/pages/ForgotPasswordPage/ForgotPasswordPage";
+import ResetPasswordPage from "@/pages/ResetPasswordPage/ResetPasswordPage";
+
+type Page = "login" | "register" | "forgot-password" | "reset-password";
+
+const getPageFromHash = (): Page => {
+  switch (window.location.hash) {
+    case "#login":
+      return "login";
+    case "#forgot-password":
+      return "forgot-password";
+    case "#reset-password":
+      return "reset-password";
+    default:
+      return "register";
+  }
+};
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<"login" | "register">(() => {
-    if (typeof window !== "undefined" && window.location.hash === "#login") {
-      return "login";
-    }
-    return "register";
-  });
+  const [currentPage, setCurrentPage] = useState<Page>(() => getPageFromHash());
 
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === "#login") {
-        setCurrentPage("login");
-      } else if (hash === "#register") {
-        setCurrentPage("register");
-      }
+      setCurrentPage(getPageFromHash());
     };
 
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  const navigateToLogin = () => {
-    window.location.hash = "login";
-    setCurrentPage("login");
+  const navigateTo = (page: Page) => {
+    window.location.hash = page;
+    setCurrentPage(page);
   };
 
-  const navigateToRegister = () => {
-    window.location.hash = "register";
-    setCurrentPage("register");
-  };
+  if (currentPage === "forgot-password") {
+    return <ForgotPasswordPage onNavigateToLogin={() => navigateTo("login")} />;
+  }
 
-  return currentPage === "register" ? (
-    <RegisterPage onNavigateToLogin={navigateToLogin} />
-  ) : (
-    <LoginPage onNavigateToRegister={navigateToRegister} />
+  if (currentPage === "reset-password") {
+    return <ResetPasswordPage onNavigateToLogin={() => navigateTo("login")} />;
+  }
+
+  if (currentPage === "register") {
+    return <RegisterPage onNavigateToLogin={() => navigateTo("login")} />;
+  }
+
+  return (
+    <LoginPage
+      onNavigateToRegister={() => navigateTo("register")}
+      onNavigateToForgotPassword={() => navigateTo("forgot-password")}
+    />
   );
 }
 

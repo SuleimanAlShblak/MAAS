@@ -2,12 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import Paper from "@/components/common/Paper/Paper";
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
+import DatePicker from "@/components/common/DatePicker/DatePicker";
+import { parseDate } from "@/components/common/DatePicker/date";
 import SegmentedControl, {
   type SegmentedControlOption,
 } from "@/components/common/SegmentedControl/SegmentedControl";
 import { Lineicons } from "@lineiconshq/react-lineicons";
 import {
-  CalendarDaysOutlined,
   Envelope1Outlined,
   EyeOutlined,
   Locked1Outlined,
@@ -89,12 +90,11 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
     if (!formData.dateOfBirth.trim()) {
       newErrors.dateOfBirth = "Date of birth is required";
     } else {
-      const timestamp = Date.parse(formData.dateOfBirth.trim());
-      const parsedDate = !isNaN(timestamp) ? new Date(timestamp) : null;
+      const parsedDate = parseDate(formData.dateOfBirth.trim());
       const now = new Date();
       if (!parsedDate) {
         newErrors.dateOfBirth =
-          "Please enter a valid date (e.g. October 12, 1994)";
+          "Please choose a valid date";
       } else if (parsedDate >= now) {
         newErrors.dateOfBirth = "Date of birth must be in the past";
       } else if (now.getFullYear() - parsedDate.getFullYear() > 125) {
@@ -302,24 +302,16 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
 
             {/* Date of Birth & Telephone Number */}
             <div className="register-grid">
-              <Input
+              <DatePicker
                 label="Date of Birth"
-                type="text"
-                name="dateOfBirth"
                 value={formData.dateOfBirth}
-                onChange={handleInputChange}
+                onChange={(value) => {
+                  setFormData((prev) => ({ ...prev, dateOfBirth: value }));
+                  setErrors((prev) => ({ ...prev, dateOfBirth: undefined }));
+                  setSubmitError(null);
+                }}
                 error={errors.dateOfBirth}
                 disabled={isLoading}
-                placeholder="October 12, 1994"
-                autoComplete="bday"
-                icon={
-                  <Lineicons
-                    icon={CalendarDaysOutlined}
-                    size={18}
-                    strokeWidth={1.8}
-                    className="register-field-icon"
-                  />
-                }
                 required
               />
 

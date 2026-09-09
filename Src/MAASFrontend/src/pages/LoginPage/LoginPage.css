@@ -81,6 +81,7 @@
 }
 
 .login-forgot-password a,
+.login-forgot-password-link,
 .login-register-prompt a,
 .login-register-link {
   color: #278dbb;
@@ -98,7 +99,12 @@
   font-size: 0.8125rem;
 }
 
+.login-forgot-password-link {
+  font-size: 0.8125rem;
+}
+
 .login-forgot-password a:hover,
+.login-forgot-password-link:hover,
 .login-register-prompt a:hover,
 .login-register-link:hover {
   color: #0879ad;

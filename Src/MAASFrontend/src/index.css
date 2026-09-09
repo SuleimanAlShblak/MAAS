@@ -1,4 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary-500: #078bc5;
+  --color-primary-600: #087eb3;
+  --color-semantic-error: #d94b55;
+}
 * {
   margin: 0;
   box-sizing: border-box;

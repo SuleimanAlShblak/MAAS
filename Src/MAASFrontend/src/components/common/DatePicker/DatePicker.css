@@ -1,0 +1,19 @@
+.date-picker { position: relative; width: 100%; }
+.date-picker-popover { position: absolute; z-index: 50; top: calc(100% + 0.5rem); left: 0; width: min(19.5rem, calc(100vw - 1.5rem)); padding: 0.875rem; border: 1px solid #dce4ed; border-radius: 0.75rem; background: white; box-shadow: 0 0.75rem 1.5rem rgba(31, 54, 78, 0.14); }
+.date-picker-navigation { display: grid; grid-template-columns: 2rem 1fr 2rem; align-items: center; margin-bottom: 0.75rem; }
+.date-picker-period { display: flex; justify-content: center; gap: 0.25rem; }
+.date-picker-period select { max-width: 6.75rem; padding: 0.25rem 0.125rem; border: 0; border-radius: 0.25rem; color: #101827; background: transparent; font: inherit; font-size: 0.875rem; font-weight: 700; text-align: center; cursor: pointer; }
+.date-picker-period select:hover { color: #0879ad; background: #e9f6fc; }
+.date-picker-period select:focus-visible { outline: 2px solid #078bc5; outline-offset: 1px; }
+.date-picker-nav-button { width: 2rem; height: 2rem; padding: 0; border: 0; border-radius: 0.375rem; color: #334155; background: transparent; font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.date-picker-nav-button:hover:not(:disabled) { color: #078bc5; background: #e9f6fc; }
+.date-picker-nav-button:disabled { color: #cbd5e1; cursor: not-allowed; }
+.date-picker-weekdays, .date-picker-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.125rem; text-align: center; }
+.date-picker-weekdays { margin-bottom: 0.25rem; color: #7a8798; font-size: 0.6875rem; font-weight: 700; }
+.date-picker-days span, .date-picker-day { aspect-ratio: 1; }
+.date-picker-day { display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 0.375rem; color: #334155; background: transparent; font-size: 0.8125rem; cursor: pointer; }
+.date-picker-day:hover:not(:disabled) { color: #0879ad; background: #e9f6fc; }
+.date-picker-day:focus-visible, .date-picker-nav-button:focus-visible, .date-picker-trigger:focus-visible { outline: 2px solid #078bc5; outline-offset: 2px; }
+.date-picker-day:disabled { color: #cbd5e1; cursor: not-allowed; }
+.date-picker-day-today { border: 1px solid #86c9e8; }
+.date-picker-day-selected, .date-picker-day-selected:hover:not(:disabled) { color: white; background: #078bc5; }
