@@ -13,6 +13,7 @@ import {
   Locked1Outlined,
   Telephone1Outlined,
   User4Outlined,
+  Buildings1Outlined,
 } from "@lineiconshq/free-icons";
 import EyeSlashOutlined from "@/components/common/icons/EyeSlashOutlined";
 import "./RegisterPage.css";
@@ -22,6 +23,7 @@ export type UserRole = "private" | "practice";
 type FormData = {
   firstName: string;
   surname: string;
+  organizationName: string;
   role: UserRole;
   dateOfBirth: string;
   telephoneNumber: string;
@@ -45,6 +47,7 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     surname: "",
+    organizationName: "",
     role: "private",
     dateOfBirth: "",
     telephoneNumber: "",
@@ -90,7 +93,8 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
       const parsedDate = !isNaN(timestamp) ? new Date(timestamp) : null;
       const now = new Date();
       if (!parsedDate) {
-        newErrors.dateOfBirth = "Please enter a valid date (e.g. October 12, 1994)";
+        newErrors.dateOfBirth =
+          "Please enter a valid date (e.g. October 12, 1994)";
       } else if (parsedDate >= now) {
         newErrors.dateOfBirth = "Date of birth must be in the past";
       } else if (now.getFullYear() - parsedDate.getFullYear() > 125) {
@@ -182,6 +186,7 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
       setFormData({
         firstName: "",
         surname: "",
+        organizationName: "",
         role: "private",
         dateOfBirth: "",
         telephoneNumber: "",
@@ -267,7 +272,25 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
                 required
               />
             </div>
-
+            <Input
+              label="Organization Name (Optional)"
+              type="text"
+              name="organizationName"
+              value={formData.organizationName}
+              onChange={handleInputChange}
+              error={errors.organizationName}
+              disabled={isLoading}
+              autoComplete="organization"
+              icon={
+                <Lineicons
+                  icon={Buildings1Outlined}
+                  size={18}
+                  strokeWidth={1.8}
+                  className="register-field-icon"
+                />
+              }
+              placeholder="Organization Name"
+            />
             {/* User Role */}
             <SegmentedControl<UserRole>
               label="User Role"
@@ -403,7 +426,9 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
               rightElement={
                 <button
                   type="button"
-                  aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                  aria-label={
+                    showConfirmPassword ? "Hide password" : "Show password"
+                  }
                   onClick={() => setShowConfirmPassword((visible) => !visible)}
                   className="register-password-toggle"
                 >
