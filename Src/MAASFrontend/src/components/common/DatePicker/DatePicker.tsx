@@ -89,32 +89,23 @@ export default function DatePicker({
     { length: leadingEmptyDays + daysInMonth },
     (_, index) => index - leadingEmptyDays + 1,
   );
-  const isCurrentMonth =
-    displayedMonth.getFullYear() === today.getFullYear() &&
-    displayedMonth.getMonth() === today.getMonth();
+  const isMaxMonth =
+    displayedMonth.getFullYear() >= today.getFullYear() &&
+    displayedMonth.getMonth() >= 11;
+  const isMinMonth =
+    displayedMonth.getFullYear() <= 1900 &&
+    displayedMonth.getMonth() <= 0;
   const years = Array.from(
     { length: today.getFullYear() - 1899 },
     (_, index) => today.getFullYear() - index,
   );
 
   const setMonth = (month: number) => {
-    setDisplayedMonth((current) => {
-      const year = current.getFullYear();
-      if (year === today.getFullYear() && month > today.getMonth()) {
-        return new Date(year, today.getMonth(), 1);
-      }
-      return new Date(year, month, 1);
-    });
+    setDisplayedMonth((current) => new Date(current.getFullYear(), month, 1));
   };
 
   const setYear = (year: number) => {
-    setDisplayedMonth((current) => {
-      const month =
-        year === today.getFullYear() && current.getMonth() > today.getMonth()
-          ? today.getMonth()
-          : current.getMonth();
-      return new Date(year, month, 1);
-    });
+    setDisplayedMonth((current) => new Date(year, current.getMonth(), 1));
   };
 
   const selectDate = (day: number) => {
@@ -122,8 +113,11 @@ export default function DatePicker({
       displayedMonth.getFullYear(),
       displayedMonth.getMonth(),
       day,
+      12,
+      0,
+      0,
     );
-    if (date > today) return;
+    if (date.getFullYear() > today.getFullYear()) return;
 
     onChange(formatDate(date));
     setIsOpen(false);
@@ -164,7 +158,7 @@ export default function DatePicker({
           id={calendarId}
           className="date-picker-popover"
           role="dialog"
-          aria-label="Choose date of birth"
+          aria-label={label ? `Choose ${label.toLowerCase()}` : "Choose date"}
         >
           <div className="date-picker-navigation">
             <button
@@ -177,6 +171,7 @@ export default function DatePicker({
                 )
               }
               aria-label="Previous month"
+              disabled={isMinMonth}
             >
               ‹
             </button>
@@ -189,14 +184,7 @@ export default function DatePicker({
                 }
               >
                 {monthLabels.map((month, index) => (
-                  <option
-                    key={month}
-                    value={index}
-                    disabled={
-                      displayedMonth.getFullYear() === today.getFullYear() &&
-                      index > today.getMonth()
-                    }
-                  >
+                  <option key={month} value={index}>
                     {month}
                   </option>
                 ))}
@@ -223,7 +211,7 @@ export default function DatePicker({
                 )
               }
               aria-label="Next month"
-              disabled={isCurrentMonth}
+              disabled={isMaxMonth}
             >
               ›
             </button>
@@ -240,8 +228,11 @@ export default function DatePicker({
                 displayedMonth.getFullYear(),
                 displayedMonth.getMonth(),
                 day,
+                12,
+                0,
+                0,
               );
-              const isFuture = date > today;
+              const isBeyondMaxYear = date.getFullYear() > today.getFullYear();
               const isSelected = selectedDate
                 ? sameDay(date, selectedDate)
                 : false;
@@ -249,7 +240,7 @@ export default function DatePicker({
                 <button
                   type="button"
                   key={day}
-                  disabled={isFuture}
+                  disabled={isBeyondMaxYear}
                   aria-pressed={isSelected}
                   aria-label={date.toLocaleDateString(undefined, {
                     day: "numeric",

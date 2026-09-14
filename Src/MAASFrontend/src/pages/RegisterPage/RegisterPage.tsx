@@ -93,10 +93,9 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
       const parsedDate = parseDate(formData.dateOfBirth.trim());
       const now = new Date();
       if (!parsedDate) {
-        newErrors.dateOfBirth =
-          "Please choose a valid date";
-      } else if (parsedDate >= now) {
-        newErrors.dateOfBirth = "Date of birth must be in the past";
+        newErrors.dateOfBirth = "Please choose a valid date";
+      } else if (parsedDate.getFullYear() > now.getFullYear()) {
+        newErrors.dateOfBirth = "Date of birth cannot be in a future year";
       } else if (now.getFullYear() - parsedDate.getFullYear() > 125) {
         newErrors.dateOfBirth = "Please enter a realistic date of birth";
       }
@@ -238,7 +237,7 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
                 onChange={handleInputChange}
                 error={errors.firstName}
                 disabled={isLoading}
-                placeholder="Sarah"
+                placeholder="Max"
                 autoComplete="given-name"
                 icon={
                   <Lineicons
@@ -259,7 +258,7 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
                 onChange={handleInputChange}
                 error={errors.surname}
                 disabled={isLoading}
-                placeholder="Jones"
+                placeholder="Mustermann"
                 autoComplete="family-name"
                 icon={
                   <Lineicons
@@ -293,7 +292,7 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
             />
             {/* User Role */}
             <SegmentedControl<UserRole>
-              label="User Role"
+              label=""
               options={roleOptions}
               value={formData.role}
               onChange={handleRoleChange}
@@ -316,14 +315,14 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
               />
 
               <Input
-                label="Telephone Number"
+                label="Phone"
                 type="tel"
                 name="telephoneNumber"
                 value={formData.telephoneNumber}
                 onChange={handleInputChange}
                 error={errors.telephoneNumber}
                 disabled={isLoading}
-                placeholder="+1 (555) 000-0000"
+                placeholder="+49 555 000 0000"
                 autoComplete="tel"
                 icon={
                   <Lineicons
@@ -339,14 +338,14 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
 
             {/* Email Address */}
             <Input
-              label="Email Address"
+              label="Email"
               type="email"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
               error={errors.email}
               disabled={isLoading}
-              placeholder="name@domain.com"
+              placeholder="max.mustermann@domain.com"
               autoComplete="email"
               icon={
                 <Lineicons
@@ -361,7 +360,7 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
 
             {/* Create Password */}
             <Input
-              label="Create Password"
+              label="Password"
               type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}
