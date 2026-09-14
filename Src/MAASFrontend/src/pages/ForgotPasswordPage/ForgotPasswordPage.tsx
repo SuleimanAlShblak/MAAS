@@ -84,6 +84,7 @@ export default function ForgotPasswordPage({
                 error={error}
                 disabled={isLoading}
                 autoComplete="email"
+                placeholder="name@example.com"
                 icon={
                   <Lineicons
                     icon={Envelope1Outlined}

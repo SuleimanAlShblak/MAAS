@@ -158,6 +158,7 @@ export default function LoginPage({
               error={errors.email}
               disabled={isLoading}
               autoComplete="email"
+              placeholder="name@example.com"
               icon={
                 <Lineicons
                   icon={Envelope1Outlined}
@@ -178,6 +179,7 @@ export default function LoginPage({
               error={errors.password}
               disabled={isLoading}
               autoComplete="current-password"
+              placeholder="Enter your password"
               icon={
                 <Lineicons
                   icon={Locked1Outlined}

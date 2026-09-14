@@ -237,7 +237,6 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
                 onChange={handleInputChange}
                 error={errors.firstName}
                 disabled={isLoading}
-                placeholder="Max"
                 autoComplete="given-name"
                 icon={
                   <Lineicons
@@ -258,7 +257,6 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
                 onChange={handleInputChange}
                 error={errors.surname}
                 disabled={isLoading}
-                placeholder="Mustermann"
                 autoComplete="family-name"
                 icon={
                   <Lineicons
@@ -288,7 +286,7 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
                   className="register-field-icon"
                 />
               }
-              placeholder="Organization Name"
+              placeholder="e.g. Practice or Clinic Name"
             />
             {/* User Role */}
             <SegmentedControl<UserRole>
@@ -345,7 +343,7 @@ export default function RegisterPage({ onNavigateToLogin }: RegisterPageProps) {
               onChange={handleInputChange}
               error={errors.email}
               disabled={isLoading}
-              placeholder="max.mustermann@domain.com"
+              placeholder="name@example.com"
               autoComplete="email"
               icon={
                 <Lineicons
